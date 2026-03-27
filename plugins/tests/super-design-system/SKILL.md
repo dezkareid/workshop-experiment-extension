@@ -1,0 +1,80 @@
+---
+name: super-design-system
+description: "Authoritative context for the project's super design tokens. Provides information on colors, spacing, and breakpoints using CSS custom properties."
+metadata:
+  version: "0.0.1"
+  author: "dezkareid"
+---
+
+## Overview
+
+This skill provides the AI assistant with authoritative context regarding the project's design tokens. It ensures that any generated code or design recommendations are consistent with the established design system.
+
+## Source of Truth
+
+The design tokens are defined in the following catalog:
+- [all-tokens-css](references/all-tokens-css.md)
+
+You MUST refer to this file to identify available color palettes, spacing scales, and breakpoints.
+
+## Usage Guidelines
+
+### 1. Prefer Tokens Over Hardcoded Values
+When generating CSS or inline styles, you MUST prefer using CSS custom properties (variables) defined in the design system instead of hardcoded HEX, RGB, or pixel values.
+
+**Bad:**
+```css
+.button {
+  background-color: #007bff;
+  padding: 16px;
+}
+```
+
+**Good:**
+```css
+.button {
+  background-color: var(--color-primary-500);
+  padding: var(--spacing-md);
+}
+```
+
+### 2. Colors
+Use semantic names for colors whenever possible (e.g., `--color-primary`, `--color-background-primary`, `--color-text-primary`). These tokens are designed to be theme-aware (supporting both light and dark modes). Refer to `references/all-tokens-css.md` for the full list of available semantic and numeric scales.
+
+### 3. Spacing
+The project uses a consistent spacing scale. Use the `--spacing-*` variables for margins, paddings, and gaps.
+
+### 4. Breakpoints
+For responsive design, use the established breakpoints in your media queries.
+Example:
+```css
+@media (min-width: var(--breakpoint-tablet)) {
+  /* ... */
+}
+```
+
+### 5. Semantic Tokens and Theming
+The project uses semantic tokens that automatically support light and dark modes. You MUST use these top-level semantic tokens instead of specific light or dark variants to ensure the UI adapts correctly to the user's theme.
+
+**Bad:**
+```css
+/* Avoid using theme-specific tokens directly in components */
+.card {
+  background-color: var(--light-color-background-primary);
+  color: var(--light-color-text-primary);
+}
+
+[data-theme='dark'] .card {
+  background-color: var(--dark-color-background-primary);
+  color: var(--dark-color-text-primary);
+}
+```
+
+**Good:**
+```css
+/* Use semantic tokens that handle theming automatically */
+.card {
+  background-color: var(--color-background-primary);
+  color: var(--color-text-primary);
+}
+```
