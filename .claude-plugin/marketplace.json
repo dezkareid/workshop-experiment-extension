@@ -7,12 +7,12 @@
   },
   "metadata": {
     "description": "Workshop Experiment Extension",
-    "version": "0.0.4"
+    "version": "0.0.5"
   },
   "plugins": [
     {
       "name": "tests",
-      "version": "0.0.2",
+      "version": "0.0.3",
       "description": "Tools for working with tests",
       "source": "./plugins/tests"
     }
